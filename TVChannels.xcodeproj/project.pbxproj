@@ -8,17 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		2B31DE2C2A33850100268978 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B31DE2B2A33850100268978 /* AppDelegate.swift */; };
-		2B31DE2E2A33850100268978 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B31DE2D2A33850100268978 /* ViewController.swift */; };
 		2B31DE332A33850200268978 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B31DE322A33850200268978 /* Assets.xcassets */; };
-		2B31DE362A33850200268978 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B31DE342A33850200268978 /* LaunchScreen.storyboard */; };
+		2B31DE412A33891C00268978 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B31DE402A33891C00268978 /* AppCoordinator.swift */; };
+		2B31DE462A338B6800268978 /* Dashboard in Frameworks */ = {isa = PBXBuildFile; productRef = 2B31DE452A338B6800268978 /* Dashboard */; };
+		2B31DE482A339AD900268978 /* Dashboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B31DE472A339AD900268978 /* Dashboard */; };
+		2B31DE6F2A339BE600268978 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B31DE6E2A339BE600268978 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2B31DE282A33850100268978 /* TVChannels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVChannels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B31DE2B2A33850100268978 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2B31DE2D2A33850100268978 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2B31DE322A33850200268978 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2B31DE352A33850200268978 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2B31DE402A33891C00268978 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		2B31DE472A339AD900268978 /* Dashboard */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Dashboard; sourceTree = "<group>"; };
+		2B31DE6E2A339BE600268978 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B31DE462A338B6800268978 /* Dashboard in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,6 +41,7 @@
 			children = (
 				2B31DE2A2A33850100268978 /* TVChannels */,
 				2B31DE292A33850100268978 /* Products */,
+				2B31DE442A338B6800268978 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -51,12 +56,60 @@
 		2B31DE2A2A33850100268978 /* TVChannels */ = {
 			isa = PBXGroup;
 			children = (
-				2B31DE2B2A33850100268978 /* AppDelegate.swift */,
-				2B31DE2D2A33850100268978 /* ViewController.swift */,
-				2B31DE322A33850200268978 /* Assets.xcassets */,
-				2B31DE342A33850200268978 /* LaunchScreen.storyboard */,
+				2B31DE3C2A33879C00268978 /* Packages */,
+				2B31DE3D2A3387F800268978 /* App */,
 			);
 			path = TVChannels;
+			sourceTree = "<group>";
+		};
+		2B31DE3C2A33879C00268978 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				2B31DE422A338AAB00268978 /* Components */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		2B31DE3D2A3387F800268978 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2B31DE3F2A3388CF00268978 /* TVChannelsApp */,
+				2B31DE3E2A33882100268978 /* Resources */,
+				2B31DE2B2A33850100268978 /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		2B31DE3E2A33882100268978 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2B31DE6E2A339BE600268978 /* LaunchScreen.storyboard */,
+				2B31DE322A33850200268978 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2B31DE3F2A3388CF00268978 /* TVChannelsApp */ = {
+			isa = PBXGroup;
+			children = (
+				2B31DE402A33891C00268978 /* AppCoordinator.swift */,
+			);
+			path = TVChannelsApp;
+			sourceTree = "<group>";
+		};
+		2B31DE422A338AAB00268978 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2B31DE472A339AD900268978 /* Dashboard */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		2B31DE442A338B6800268978 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -75,6 +128,9 @@
 			dependencies = (
 			);
 			name = TVChannels;
+			packageProductDependencies = (
+				2B31DE452A338B6800268978 /* Dashboard */,
+			);
 			productName = TVChannels;
 			productReference = 2B31DE282A33850100268978 /* TVChannels.app */;
 			productType = "com.apple.product-type.application";
@@ -117,8 +173,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B31DE362A33850200268978 /* LaunchScreen.storyboard in Resources */,
 				2B31DE332A33850200268978 /* Assets.xcassets in Resources */,
+				2B31DE6F2A339BE600268978 /* LaunchScreen.storyboard in Resources */,
+				2B31DE482A339AD900268978 /* Dashboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,23 +186,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B31DE2E2A33850100268978 /* ViewController.swift in Sources */,
+				2B31DE412A33891C00268978 /* AppCoordinator.swift in Sources */,
 				2B31DE2C2A33850100268978 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		2B31DE342A33850200268978 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2B31DE352A33850200268978 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2B31DE372A33850200268978 /* Debug */ = {
@@ -280,6 +326,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = NL.TVChannels;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -305,6 +354,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = NL.TVChannels;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -334,6 +386,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2B31DE452A338B6800268978 /* Dashboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Dashboard;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2B31DE202A33850100268978 /* Project object */;
 }
