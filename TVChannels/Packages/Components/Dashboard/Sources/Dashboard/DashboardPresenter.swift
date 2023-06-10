@@ -2,7 +2,8 @@ import Foundation
 
 protocol DashboardPresenterProtocol: AnyObject {
     func viewDidLoad()
-    func channelsLoadingFinished(_ channels: [Channel])
+    func channelInfoLoadingFinished(_ channelInfo: [ChannelInfo])
+    func showProgramGuide(by indexPath: IndexPath)
 }
 
 final class DashboardPresenter {
@@ -12,6 +13,10 @@ final class DashboardPresenter {
     weak var view: DashboardViewProtocol?
     var interactor: DashboardInteractorProtocol?
     var router: DashboardRouterProtocol?
+
+    // MARK: - Private properties
+
+    private var channelInfo: [ChannelInfo] = []
 
     // MARK: - Lifecycle
 
@@ -30,15 +35,23 @@ extension DashboardPresenter: DashboardPresenterProtocol {
 
     func viewDidLoad() {
         view?.startLoading()
-        interactor?.loadChannels()
+        interactor?.loadData()
     }
 
-    func channelsLoadingFinished(_ channels: [Channel]) {
-        let cellViewModels = channels.map {
-            ChannelCellViewModel(channel: $0)
+    func channelInfoLoadingFinished(_ channelInfo: [ChannelInfo]) {
+        self.channelInfo = channelInfo
+
+        let cellViewModels = channelInfo.map {
+            ChannelCellViewModel(info: $0)
         }
 
         view?.stopLoading()
         view?.showChannels(cellViewModels)
+    }
+
+    func showProgramGuide(by indexPath: IndexPath) {
+        let program = channelInfo[indexPath.row].programs
+
+        print(program)
     }
 }

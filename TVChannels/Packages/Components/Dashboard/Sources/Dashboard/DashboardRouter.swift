@@ -15,9 +15,14 @@ public final class DashboardRouter {
     public struct Dependencies {
 
         let network: RequestProvidable
+        let dateFormatter: DateFormatter
 
-        public init(network: RequestProvidable) {
+        public init(
+            network: RequestProvidable,
+            dateFormatter: DateFormatter
+        ) {
             self.network = network
+            self.dateFormatter = dateFormatter
         }
     }
 
@@ -50,7 +55,8 @@ public final class DashboardRouter {
         let view = DashboardViewController.loadFromNib(bundle: .module)
         let presenter = DashboardPresenter()
         let interactor = DashboardInteractor(
-            network: dependencies.network
+            network: dependencies.network,
+            dateFormatter: dependencies.dateFormatter
         )
         let router = DashboardRouter(onEvent: onEvent)
 

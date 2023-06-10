@@ -26,9 +26,9 @@ struct ChannelCellViewModel: ChannelCellViewModelInput {
 
     // MARK: - Init
 
-    init(channel: Channel) {
-        self.number = String(channel.orderNumber)
-        self.name = channel.callSign
+    init(info: ChannelInfo) {
+        self.number = String(info.channel.orderNumber)
+        self.name = info.channel.callSign
     }
 }
 
