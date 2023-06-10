@@ -2,7 +2,6 @@ import Foundation
 
 protocol DashboardPresenter: AnyObject {
     func viewDidLoad()
-    func didTap()
 }
 
 final class DashboardPresenterImpl {
@@ -26,9 +25,5 @@ extension DashboardPresenterImpl: DashboardPresenter {
 
     func viewDidLoad() {
 
-    }
-
-    func didTap() {
-        router?.onTap()
     }
 }

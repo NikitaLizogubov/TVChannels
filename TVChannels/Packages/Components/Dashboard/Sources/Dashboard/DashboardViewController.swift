@@ -47,7 +47,7 @@ final class DashboardViewImpl: UIViewController {
 
     @objc
     private func didTap(_ sender: Any) {
-        presenter?.didTap()
+
     }
 }
 

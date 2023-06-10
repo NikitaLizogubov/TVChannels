@@ -13,6 +13,7 @@
 		2B31DE462A338B6800268978 /* Dashboard in Frameworks */ = {isa = PBXBuildFile; productRef = 2B31DE452A338B6800268978 /* Dashboard */; };
 		2B31DE482A339AD900268978 /* Dashboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B31DE472A339AD900268978 /* Dashboard */; };
 		2B31DE6F2A339BE600268978 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B31DE6E2A339BE600268978 /* LaunchScreen.storyboard */; };
+		2B31DE762A34884F00268978 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 2B31DE752A34884F00268978 /* Network */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		2B31DE402A33891C00268978 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		2B31DE472A339AD900268978 /* Dashboard */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Dashboard; sourceTree = "<group>"; };
 		2B31DE6E2A339BE600268978 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2B31DE742A34884400268978 /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Network; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +32,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B31DE462A338B6800268978 /* Dashboard in Frameworks */,
+				2B31DE762A34884F00268978 /* Network in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +68,7 @@
 		2B31DE3C2A33879C00268978 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				2B31DE702A339D2F00268978 /* Utils */,
 				2B31DE422A338AAB00268978 /* Components */,
 			);
 			path = Packages;
@@ -112,6 +116,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2B31DE702A339D2F00268978 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2B31DE712A339D3900268978 /* Services */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		2B31DE712A339D3900268978 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2B31DE742A34884400268978 /* Network */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -130,6 +150,7 @@
 			name = TVChannels;
 			packageProductDependencies = (
 				2B31DE452A338B6800268978 /* Dashboard */,
+				2B31DE752A34884F00268978 /* Network */,
 			);
 			productName = TVChannels;
 			productReference = 2B31DE282A33850100268978 /* TVChannels.app */;
@@ -391,6 +412,10 @@
 		2B31DE452A338B6800268978 /* Dashboard */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Dashboard;
+		};
+		2B31DE752A34884F00268978 /* Network */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Network;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

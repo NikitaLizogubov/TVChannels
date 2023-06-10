@@ -1,18 +1,23 @@
 import UIKit
+import Network
 
 protocol DashboardRouter {
-    func onTap()
+    
 }
 
 public final class DashboardRouterImpl {
 
     public enum Event {
-        case onTap
+
     }
 
     public struct Dependencies {
 
-        public init() { }
+        let network: RequestProvidable
+
+        public init(network: RequestProvidable) {
+            self.network = network
+        }
     }
 
     // MARK: - Internal properties
@@ -61,7 +66,4 @@ public final class DashboardRouterImpl {
 
 extension DashboardRouterImpl: DashboardRouter {
 
-    func onTap() {
-        onEvent(.onTap)
-    }
 }

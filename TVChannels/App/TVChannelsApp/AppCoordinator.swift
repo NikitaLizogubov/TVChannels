@@ -1,13 +1,24 @@
 import UIKit
+import Network
 import Dashboard
 
 final class AppCoordinator {
 
+    // MARK: - Public properties
+
     var window: UIWindow?
+
+    // MARK: - Private properties
+
+    private let network: RequestProvidable = Network()
+
+    // MARK: - Init
 
     init() {
         self.window = makeWindow()
     }
+
+    // MARK: - Private methods
 
     private func makeWindow() -> UIWindow {
         let window = UIWindow(frame: UIScreen.main.bounds)
@@ -17,18 +28,12 @@ final class AppCoordinator {
     }
 
     private func makeRootViewController() -> UIViewController {
-        let dependencies = DashboardRouterImpl.Dependencies()
-        let view = DashboardRouterImpl.build(with: dependencies) { [weak self] event in
-            switch event {
-            case .onTap:
-                print("----")
-                let view = DashboardRouterImpl.build(with: .init()) { _ in
-                    print("----")
-                    (self?.window?.rootViewController as? UINavigationController)?.popViewController(animated: true)
-                }
-                (self?.window?.rootViewController as? UINavigationController)?.pushViewController(view, animated: true)
-            }
+        let dependencies = DashboardRouterImpl.Dependencies(
+            network: network
+        )
+        let view = DashboardRouterImpl.build(with: dependencies) { _ in
+            // TODO: Implement navigation to other modules
         }
-        return UINavigationController(rootViewController: view)
+        return view
     }
 }
