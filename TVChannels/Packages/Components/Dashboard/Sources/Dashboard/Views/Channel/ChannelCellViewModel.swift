@@ -8,11 +8,7 @@ protocol ChannelCellViewModelInput {
     var nameColor: UIColor { get }
 }
 
-protocol ChannelCellViewModelOutput {
-
-}
-
-typealias ChannelCellViewModelProtocol = ChannelCellViewModelInput & ChannelCellViewModelOutput
+typealias ChannelCellViewModelProtocol = ChannelCellViewModelInput
 
 struct ChannelCellViewModel: ChannelCellViewModelInput {
 
@@ -30,10 +26,4 @@ struct ChannelCellViewModel: ChannelCellViewModelInput {
         self.number = String(info.channel.orderNumber)
         self.name = info.channel.callSign
     }
-}
-
-// MARK: - ChannelCellViewModelOutput
-
-extension ChannelCellViewModel: ChannelCellViewModelOutput {
-
 }

@@ -12,9 +12,14 @@ final class AppCoordinator {
 
     private let network: RequestProvidable = Network()
 
-    private let dateFormatter: DateFormatter = {
+    private let networkDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        return dateFormatter
+    }()
+    private let programDateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, h:mm a"
         return dateFormatter
     }()
 
@@ -36,7 +41,8 @@ final class AppCoordinator {
     private func makeRootViewController() -> UIViewController {
         let dependencies = DashboardRouter.Dependencies(
             network: network,
-            dateFormatter: dateFormatter
+            networkDateFormatter: networkDateFormatter,
+            programDateFormatter: programDateFormatter
         )
         let view = DashboardRouter.build(with: dependencies) { _ in
             // TODO: Implement navigation to other modules

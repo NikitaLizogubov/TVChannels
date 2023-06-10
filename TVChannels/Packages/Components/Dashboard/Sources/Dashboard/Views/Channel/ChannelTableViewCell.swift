@@ -1,10 +1,3 @@
-//
-//  ChannelTableViewCell.swift
-//  
-//
-//  Created by iuada110 on 10.06.2023.
-//
-
 import UIKit
 
 final class ChannelTableViewCell: UITableViewCell {
@@ -21,8 +14,11 @@ final class ChannelTableViewCell: UITableViewCell {
             bindViewModel()
         }
     }
+}
 
-    // MARK: - Private methods
+// MARK: - Private
+
+private extension ChannelTableViewCell {
 
     private func bindViewModel() {
         guard let viewModel else { return }
@@ -33,5 +29,4 @@ final class ChannelTableViewCell: UITableViewCell {
         numberLabel.textColor = viewModel.numberColor
         nameLabel.textColor = viewModel.nameColor
     }
-
 }

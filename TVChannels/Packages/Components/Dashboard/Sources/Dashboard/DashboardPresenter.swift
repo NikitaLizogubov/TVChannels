@@ -16,11 +16,15 @@ final class DashboardPresenter {
 
     // MARK: - Private properties
 
+    private let dateFormatter: DateFormatter
+
     private var channelInfo: [ChannelInfo] = []
 
     // MARK: - Lifecycle
 
-    init() {
+    init(dateFormatter: DateFormatter) {
+        self.dateFormatter = dateFormatter
+
         print("\(self) -> 💫")
     }
 
@@ -50,8 +54,10 @@ extension DashboardPresenter: DashboardPresenterProtocol {
     }
 
     func showProgramGuide(by indexPath: IndexPath) {
-        let program = channelInfo[indexPath.row].programs
+        let programs = channelInfo[indexPath.row].programs.map {
+            ProgramCellViewModel(program: $0, dateFormatter: dateFormatter)
+        }
 
-        print(program)
+        view?.showPrograms(programs)
     }
 }

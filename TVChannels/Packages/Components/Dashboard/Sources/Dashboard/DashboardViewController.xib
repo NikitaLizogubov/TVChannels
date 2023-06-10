@@ -5,6 +5,7 @@
         <deployment identifier="tvOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -12,6 +13,7 @@
             <connections>
                 <outlet property="channelTableVIew" destination="vSH-fb-F0V" id="R6X-tn-odp"/>
                 <outlet property="loadingView" destination="Ta5-XB-rcH" id="c6q-rW-15z"/>
+                <outlet property="programCollectionView" destination="zTa-F2-0hS" id="FCR-1n-061"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Eym-vH-oyN"/>
             </connections>
         </placeholder>
@@ -29,7 +31,35 @@
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yws-rU-5Cn">
                     <rect key="frame" x="360" y="0.0" width="1560" height="1080"/>
+                    <subviews>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="zTa-F2-0hS">
+                            <rect key="frame" x="32" y="0.0" width="1528" height="1080"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WlW-fk-bxz">
+                                <size key="itemSize" width="128" height="128"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <cells>
+                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="oGw-P5-2qU">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="16Q-Ks-A6i">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </collectionViewCellContentView>
+                                </collectionViewCell>
+                            </cells>
+                        </collectionView>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="zTa-F2-0hS" secondAttribute="trailing" id="EJy-dX-JCN"/>
+                        <constraint firstItem="zTa-F2-0hS" firstAttribute="top" secondItem="Yws-rU-5Cn" secondAttribute="top" id="SkM-5V-W7I"/>
+                        <constraint firstItem="zTa-F2-0hS" firstAttribute="leading" secondItem="Yws-rU-5Cn" secondAttribute="leading" constant="32" id="Yzw-QI-kFL"/>
+                        <constraint firstAttribute="bottom" secondItem="zTa-F2-0hS" secondAttribute="bottom" id="vmZ-LM-Esj"/>
+                    </constraints>
                 </view>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Ta5-XB-rcH">
                     <rect key="frame" x="940" y="520" width="40" height="40"/>
@@ -37,7 +67,7 @@
                 </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="nkI-NY-t1X"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.85193757243923374" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="vSH-fb-F0V" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="AZ1-EV-9wQ"/>
                 <constraint firstAttribute="bottom" secondItem="vSH-fb-F0V" secondAttribute="bottom" id="IR3-L7-qTj"/>
