@@ -1,14 +1,19 @@
 import Foundation
 
-protocol DashboardPresenter: AnyObject {
+protocol DashboardPresenterProtocol: AnyObject {
     func viewDidLoad()
+    func channelsLoadingFinished(_ channels: [Channel])
 }
 
-final class DashboardPresenterImpl {
+final class DashboardPresenter {
 
-    weak var view: DashboardView?
-    var interactor: DashboardInteractor?
-    var router: DashboardRouter?
+    // MARK: - Public properties
+
+    weak var view: DashboardViewProtocol?
+    var interactor: DashboardInteractorProtocol?
+    var router: DashboardRouterProtocol?
+
+    // MARK: - Lifecycle
 
     init() {
         print("\(self) -> 💫")
@@ -19,11 +24,21 @@ final class DashboardPresenterImpl {
     }
 }
 
-// MARK: - DashboardPresenter
+// MARK: - DashboardPresenterProtocol
 
-extension DashboardPresenterImpl: DashboardPresenter {
+extension DashboardPresenter: DashboardPresenterProtocol {
 
     func viewDidLoad() {
+        view?.startLoading()
+        interactor?.loadChannels()
+    }
 
+    func channelsLoadingFinished(_ channels: [Channel]) {
+        let cellViewModels = channels.map {
+            ChannelCellViewModel(channel: $0)
+        }
+
+        view?.stopLoading()
+        view?.showChannels(cellViewModels)
     }
 }

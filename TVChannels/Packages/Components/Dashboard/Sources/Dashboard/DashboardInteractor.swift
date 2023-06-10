@@ -1,14 +1,25 @@
 import Foundation
+import Network
 
-protocol DashboardInteractor {
-
+protocol DashboardInteractorProtocol {
+    func loadChannels()
 }
 
-final class DashboardInteractorImpl {
+final class DashboardInteractor {
 
-    weak var presenter: DashboardPresenter?
+    // MARK: - Public properties
 
-    init() {
+    weak var presenter: DashboardPresenterProtocol?
+
+    // MARK: - Private properties
+
+    private let network: RequestProvidable
+
+    // MARK: - Lifecycle
+
+    init(network: RequestProvidable) {
+        self.network = network
+
         print("\(self) -> 💫")
     }
 
@@ -17,8 +28,24 @@ final class DashboardInteractorImpl {
     }
 }
 
-// MARK: - DashboardInteractor
+// MARK: - DashboardInteractorProtocol
 
-extension DashboardInteractorImpl: DashboardInteractor {
+extension DashboardInteractor: DashboardInteractorProtocol {
 
+    func loadChannels() {
+        let request = GETChannelsRequest()
+        network.request(with: request) { [weak self] (result: Result<[Channel]?, NetworkError>) in
+            switch result {
+            case .success(let channels):
+                guard let channels else { return }
+
+                // Simulate slow internet
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self?.presenter?.channelsLoadingFinished(channels)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }

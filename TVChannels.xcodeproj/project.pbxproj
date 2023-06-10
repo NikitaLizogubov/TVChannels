@@ -14,6 +14,7 @@
 		2B31DE482A339AD900268978 /* Dashboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B31DE472A339AD900268978 /* Dashboard */; };
 		2B31DE6F2A339BE600268978 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B31DE6E2A339BE600268978 /* LaunchScreen.storyboard */; };
 		2B31DE762A34884F00268978 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 2B31DE752A34884F00268978 /* Network */; };
+		2B31DE802A34995000268978 /* CommonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2B31DE7F2A34995000268978 /* CommonUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		2B31DE472A339AD900268978 /* Dashboard */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Dashboard; sourceTree = "<group>"; };
 		2B31DE6E2A339BE600268978 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B31DE742A34884400268978 /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Network; sourceTree = "<group>"; };
+		2B31DE7E2A34993A00268978 /* CommonUI */ = {isa = PBXFileReference; lastKnownFileType = text; name = CommonUI; path = TVChannels/Packages/Utils/Services/CommonUI; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B31DE802A34995000268978 /* CommonUI in Frameworks */,
 				2B31DE462A338B6800268978 /* Dashboard in Frameworks */,
 				2B31DE762A34884F00268978 /* Network in Frameworks */,
 			);
@@ -68,6 +71,7 @@
 		2B31DE3C2A33879C00268978 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				2B31DE7D2A34992500268978 /* Common */,
 				2B31DE702A339D2F00268978 /* Utils */,
 				2B31DE422A338AAB00268978 /* Components */,
 			);
@@ -132,6 +136,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		2B31DE7D2A34992500268978 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				2B31DE7E2A34993A00268978 /* CommonUI */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -151,6 +163,7 @@
 			packageProductDependencies = (
 				2B31DE452A338B6800268978 /* Dashboard */,
 				2B31DE752A34884F00268978 /* Network */,
+				2B31DE7F2A34995000268978 /* CommonUI */,
 			);
 			productName = TVChannels;
 			productReference = 2B31DE282A33850100268978 /* TVChannels.app */;
@@ -416,6 +429,10 @@
 		2B31DE752A34884F00268978 /* Network */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Network;
+		};
+		2B31DE7F2A34995000268978 /* CommonUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CommonUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

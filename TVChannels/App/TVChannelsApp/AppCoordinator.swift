@@ -28,10 +28,10 @@ final class AppCoordinator {
     }
 
     private func makeRootViewController() -> UIViewController {
-        let dependencies = DashboardRouterImpl.Dependencies(
+        let dependencies = DashboardRouter.Dependencies(
             network: network
         )
-        let view = DashboardRouterImpl.build(with: dependencies) { _ in
+        let view = DashboardRouter.build(with: dependencies) { _ in
             // TODO: Implement navigation to other modules
         }
         return view

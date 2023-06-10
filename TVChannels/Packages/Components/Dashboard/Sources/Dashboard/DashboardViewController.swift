@@ -1,14 +1,33 @@
 import UIKit
+import CommonUI
 
-protocol DashboardView: AnyObject {
+protocol DashboardViewProtocol: AnyObject {
+    func startLoading()
+    func stopLoading()
 
+    func showChannels(_ channelViewModels: [ChannelCellViewModelProtocol])
 }
 
-final class DashboardViewImpl: UIViewController {
+final class DashboardViewController: UIViewController {
+
+    // MARK: - IBOutlet
+
+    @IBOutlet private weak var channelTableVIew: UITableView! {
+        didSet {
+            channelTableVIew.dataSource = self
+            channelTableVIew.delegate = self
+            channelTableVIew.register(ChannelTableViewCell.loadFromNib(bundle: .module), forCellReuseIdentifier: ChannelTableViewCell.identifier)
+        }
+    }
+    @IBOutlet private weak var loadingView: UIActivityIndicatorView!
 
     // MARK: - Public properties
 
-    var presenter: DashboardPresenter?
+    var presenter: DashboardPresenterProtocol?
+
+    // MARK: - Private methods
+
+    private var channelViewModels: [ChannelCellViewModelProtocol] = []
 
     // MARK: - Lifecycle
 
@@ -17,42 +36,53 @@ final class DashboardViewImpl: UIViewController {
 
         print("\(self) -> 💫")
 
-        setupView()
         presenter?.viewDidLoad()
     }
 
     deinit {
         print("\(self) -> ☠️")
     }
+}
 
-    // MARK: - Private methods
+// MARK: - DashboardViewProtocol
 
-    private func setupView() {
-        view.backgroundColor = .blue
+extension DashboardViewController: DashboardViewProtocol {
 
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .red
-        button.setTitle("button", for: .normal)
-        button.addTarget(self, action: #selector(didTap), for: .primaryActionTriggered)
-
-        view.addSubview(button)
-        NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
+    func startLoading() {
+        loadingView.isHidden = false
     }
 
-    // MARK: - Actions
+    func stopLoading() {
+        loadingView.isHidden = true
+    }
 
-    @objc
-    private func didTap(_ sender: Any) {
+    func showChannels(_ channelViewModels: [ChannelCellViewModelProtocol]) {
+        self.channelViewModels = channelViewModels
 
+        channelTableVIew.reloadData()
     }
 }
 
-// MARK: - DashboardView
+// MARK: - UITableViewDataSource
 
-extension DashboardViewImpl: DashboardView {
+extension DashboardViewController: UITableViewDataSource {
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        channelViewModels.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ChannelTableViewCell.identifier, for: indexPath) as! ChannelTableViewCell
+        cell.viewModel = channelViewModels[indexPath.row]
+        return cell
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension DashboardViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(#function)
+    }
 }

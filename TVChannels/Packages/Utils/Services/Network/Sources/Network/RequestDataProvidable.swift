@@ -14,3 +14,18 @@ public protocol RequestDataProvidable {
     var params: [String: String] { get }
     var headers: [String: String] { get }
 }
+
+public extension RequestDataProvidable {
+
+    var method: HttpMethod {
+        .get
+    }
+
+    var params: [String: String] {
+        [:]
+    }
+
+    var headers: [String: String] {
+        [:]
+    }
+}

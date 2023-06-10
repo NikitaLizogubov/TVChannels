@@ -3,6 +3,11 @@ import Foundation
 public protocol RequestProvidable {
     func request<ResponseBody: Decodable>(
         with requestData: RequestDataProvidable,
+        completion: @escaping (Result<ResponseBody?, NetworkError>) -> Void
+    )
+
+    func request<ResponseBody: Decodable>(
+        with requestData: RequestDataProvidable,
         decoder: JSONDecoder,
         completionQueue: DispatchQueue,
         completion: @escaping (Result<ResponseBody?, NetworkError>) -> Void
@@ -41,15 +46,23 @@ public final class Network {
             return .noInternetConnection
         }
     }
-
-    private func decode<ResponseBody: Decodable>(_ decoder: JSONDecoder, _ data: Data) -> ResponseBody? {
-        try? decoder.decode(ResponseBody.self, from: data)
-    }
 }
 
 // MARK: - RequestProvidable
 
 extension Network: RequestProvidable {
+
+    public func request<ResponseBody: Decodable>(
+        with requestData: RequestDataProvidable,
+        completion: @escaping (Result<ResponseBody?, NetworkError>) -> Void
+    ) {
+        request(
+            with: requestData,
+            decoder: JSONDecoder(),
+            completionQueue: .main,
+            completion: completion
+        )
+    }
 
     public func request<ResponseBody: Decodable>(
         with requestData: RequestDataProvidable,
@@ -78,7 +91,9 @@ extension Network: RequestProvidable {
                     break
                 }
 
-                result = .success(decode(decoder, data))
+                let decodedData = try? decoder.decode(ResponseBody.self, from: data)
+
+                result = .success(decodedData)
             default:
                 result = .failure(.unsuccessfulStatusCode)
             }

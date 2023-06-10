@@ -1,11 +1,12 @@
 import UIKit
 import Network
+import CommonUI
 
-protocol DashboardRouter {
+protocol DashboardRouterProtocol {
     
 }
 
-public final class DashboardRouterImpl {
+public final class DashboardRouter {
 
     public enum Event {
 
@@ -46,10 +47,12 @@ public final class DashboardRouterImpl {
         with dependencies: Dependencies,
         onEvent: @escaping (Event) -> Void
     ) -> UIViewController {
-        let view = DashboardViewImpl()
-        let presenter = DashboardPresenterImpl()
-        let interactor = DashboardInteractorImpl()
-        let router = DashboardRouterImpl(onEvent: onEvent)
+        let view = DashboardViewController.loadFromNib(bundle: .module)
+        let presenter = DashboardPresenter()
+        let interactor = DashboardInteractor(
+            network: dependencies.network
+        )
+        let router = DashboardRouter(onEvent: onEvent)
 
         presenter.view = view
         presenter.interactor = interactor
@@ -62,8 +65,8 @@ public final class DashboardRouterImpl {
     }
 }
 
-// MARK: - DashboardRouter
+// MARK: - DashboardRouterProtocol
 
-extension DashboardRouterImpl: DashboardRouter {
+extension DashboardRouter: DashboardRouterProtocol {
 
 }
