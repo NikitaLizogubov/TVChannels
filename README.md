@@ -30,4 +30,4 @@ https://github.com/NikitaLizogubov/TVChannels/assets/42281938/0f166591-8db5-483b
 
 2. - [x] Creating extendable architecture, which will allow lazy-loading and caching of program items in the future.
 
-> To implement lazy loading we must support a query parameter like: ?page=1 or ?limit=10.
+> To implement lazy loading API must support a query parameters such as: ?page=1 and ?limit=10.
