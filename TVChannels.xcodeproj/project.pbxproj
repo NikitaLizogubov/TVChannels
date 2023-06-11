@@ -26,8 +26,8 @@
 		2B31DE472A339AD900268978 /* Dashboard */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Dashboard; sourceTree = "<group>"; };
 		2B31DE6E2A339BE600268978 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B31DE742A34884400268978 /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Network; sourceTree = "<group>"; };
-		2B31DE7E2A34993A00268978 /* CommonUI */ = {isa = PBXFileReference; lastKnownFileType = text; name = CommonUI; path = TVChannels/Packages/Utils/Services/CommonUI; sourceTree = SOURCE_ROOT; };
-		2B6793332A35E18400776389 /* DashboardTypes */ = {isa = PBXFileReference; lastKnownFileType = text; name = DashboardTypes; path = TVChannels/Packages/Utils/Services/DashboardTypes; sourceTree = SOURCE_ROOT; };
+		2B31DE7E2A34993A00268978 /* CommonUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonUI; path = TVChannels/Packages/Common/CommonUI; sourceTree = SOURCE_ROOT; };
+		2B6793332A35E18400776389 /* DashboardTypes */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DashboardTypes; path = TVChannels/Packages/Components/DashboardTypes; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
