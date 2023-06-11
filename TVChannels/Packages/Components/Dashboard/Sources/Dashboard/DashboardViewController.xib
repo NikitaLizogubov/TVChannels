@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DashboardViewController" customModule="Dashboard">
             <connections>
-                <outlet property="channelTableVIew" destination="vSH-fb-F0V" id="R6X-tn-odp"/>
+                <outlet property="channelTableView" destination="vSH-fb-F0V" id="R6X-tn-odp"/>
                 <outlet property="loadingView" destination="Ta5-XB-rcH" id="c6q-rW-15z"/>
                 <outlet property="programCollectionView" destination="zTa-F2-0hS" id="FCR-1n-061"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Eym-vH-oyN"/>
@@ -33,7 +33,7 @@
                     <rect key="frame" x="360" y="0.0" width="1560" height="1080"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="zTa-F2-0hS">
-                            <rect key="frame" x="32" y="0.0" width="1528" height="1080"/>
+                            <rect key="frame" x="32" y="16" width="1528" height="1048"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WlW-fk-bxz">
                                 <size key="itemSize" width="128" height="128"/>
@@ -56,9 +56,9 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="zTa-F2-0hS" secondAttribute="trailing" id="EJy-dX-JCN"/>
-                        <constraint firstItem="zTa-F2-0hS" firstAttribute="top" secondItem="Yws-rU-5Cn" secondAttribute="top" id="SkM-5V-W7I"/>
+                        <constraint firstAttribute="bottom" secondItem="zTa-F2-0hS" secondAttribute="bottom" constant="16" id="O2s-0v-wlO"/>
                         <constraint firstItem="zTa-F2-0hS" firstAttribute="leading" secondItem="Yws-rU-5Cn" secondAttribute="leading" constant="32" id="Yzw-QI-kFL"/>
-                        <constraint firstAttribute="bottom" secondItem="zTa-F2-0hS" secondAttribute="bottom" id="vmZ-LM-Esj"/>
+                        <constraint firstItem="zTa-F2-0hS" firstAttribute="top" secondItem="Yws-rU-5Cn" secondAttribute="top" constant="16" id="iaP-aY-L4L"/>
                     </constraints>
                 </view>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Ta5-XB-rcH">

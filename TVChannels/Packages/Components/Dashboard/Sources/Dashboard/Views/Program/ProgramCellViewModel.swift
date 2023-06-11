@@ -1,4 +1,5 @@
 import UIKit
+import DashboardTypes
 
 protocol ProgramCellViewModelInput {
     var name: String { get }
@@ -6,11 +7,14 @@ protocol ProgramCellViewModelInput {
 
     var nameColor: UIColor { get }
     var startTimeColor: UIColor { get }
+
+    var backgroundColor: UIColor { get }
+    var focusBackgroundColor: UIColor { get }
 }
 
-typealias ProgramCellViewModelProtocol = ProgramCellViewModelInput
+typealias ProgramCellViewModelProtocol = ProgramCellViewModelInput & ProgramGuideViewModel
 
-struct ProgramCellViewModel: ProgramCellViewModelInput {
+struct ProgramCellViewModel: ProgramCellViewModelProtocol {
 
     // MARK: - Public properties
 
@@ -20,10 +24,28 @@ struct ProgramCellViewModel: ProgramCellViewModelInput {
     let nameColor: UIColor = .black
     let startTimeColor: UIColor = .black
 
+    let backgroundColor: UIColor = .white
+    let focusBackgroundColor: UIColor = .systemYellow
+
+    // MARK: - Private properties
+
+    private let selectionHandler: () -> Void
+
     // MARK: - Init
 
-    init(program: Program, dateFormatter: DateFormatter) {
+    init(
+        program: Program,
+        dateFormatter: DateFormatter,
+        selectionHandler: @escaping () -> Void
+    ) {
         self.name = program.name
         self.startTime = dateFormatter.string(from: program.startTime)
+        self.selectionHandler = selectionHandler
+    }
+
+    // MARK: - Public methods
+
+    func didSelect() {
+        selectionHandler()
     }
 }

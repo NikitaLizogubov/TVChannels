@@ -1,15 +1,17 @@
 import UIKit
 import Network
 import CommonUI
+import DashboardTypes
 
 protocol DashboardRouterProtocol {
-    
+    func showProgramDetails(_ program: Program)
+    func showError(_ message: String)
 }
 
 public final class DashboardRouter {
 
     public enum Event {
-
+        case programDetails(Program)
     }
 
     public struct Dependencies {
@@ -31,7 +33,7 @@ public final class DashboardRouter {
 
     // MARK: - Internal properties
 
-    weak var view: UIViewController?
+    weak var viewController: UIViewController?
 
     // MARK: - Private properties
 
@@ -55,8 +57,10 @@ public final class DashboardRouter {
         with dependencies: Dependencies,
         onEvent: @escaping (Event) -> Void
     ) -> UIViewController {
-        let view = DashboardViewController.loadFromNib(bundle: .module)
+        let programLayout = ProgramLayout()
+        let viewController = DashboardViewController.loadFromNib(bundle: .module)
         let presenter = DashboardPresenter(
+            grid: programLayout.grid,
             dateFormatter: dependencies.programDateFormatter
         )
         let interactor = DashboardInteractor(
@@ -65,14 +69,15 @@ public final class DashboardRouter {
         )
         let router = DashboardRouter(onEvent: onEvent)
 
-        presenter.view = view
+        presenter.view = viewController
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
-        view.presenter = presenter
-        router.view = view
+        viewController.presenter = presenter
+        viewController.programLayout = programLayout
+        router.viewController = viewController
 
-        return view
+        return viewController
     }
 }
 
@@ -80,4 +85,17 @@ public final class DashboardRouter {
 
 extension DashboardRouter: DashboardRouterProtocol {
 
+    func showProgramDetails(_ program: Program) {
+        onEvent(.programDetails(program))
+    }
+
+    func showError(_ message: String) {
+        let alertViewController = AlertBuilder(style: .alert)
+            .title("Error!")
+            .message(message)
+            .button("OK", style: .cancel, completionHandler: nil)
+            .alertController
+
+        viewController?.present(alertViewController, animated: true)
+    }
 }

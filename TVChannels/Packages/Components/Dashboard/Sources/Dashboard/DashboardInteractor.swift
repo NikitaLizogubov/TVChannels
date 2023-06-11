@@ -1,5 +1,6 @@
 import Foundation
 import Network
+import DashboardTypes
 
 protocol DashboardInteractorProtocol {
     func loadData()
@@ -42,6 +43,7 @@ extension DashboardInteractor: DashboardInteractorProtocol {
 
         var channels: [Channel] = []
         var programs: [Program] = []
+        var error: NetworkError?
 
         dispatchGroup.enter()
         loadChannels(
@@ -49,7 +51,10 @@ extension DashboardInteractor: DashboardInteractorProtocol {
                 channels = $0
                 dispatchGroup.leave()
             },
-            onFailure: handleError
+            onFailure: {
+                error = $0
+                dispatchGroup.leave()
+            }
         )
 
         dispatchGroup.enter()
@@ -58,12 +63,19 @@ extension DashboardInteractor: DashboardInteractorProtocol {
                 programs = $0
                 dispatchGroup.leave()
             },
-            onFailure: handleError
+            onFailure: {
+                error = $0
+                dispatchGroup.leave()
+            }
         )
 
         dispatchGroup.notify(queue: .main) { [self] in
-            let infos = mapChannelsWithPrograms(channels, programs)
-            presenter?.channelInfoLoadingFinished(infos)
+            if let error {
+                presenter?.showError(error.localizedDescription)
+            } else {
+                let infos = ChannelInfo.map(channels, programs)
+                presenter?.channelInfoLoadingFinished(infos)
+            }
         }
     }
 }
@@ -110,22 +122,6 @@ private extension DashboardInteractor {
             case .failure(let error):
                 onFailure(error)
             }
-        }
-    }
-
-    func handleError(_ error: NetworkError) {
-        // TODO: - Add error handling
-        print(error.localizedDescription)
-    }
-
-    func mapChannelsWithPrograms(_ channels: [Channel], _ programs: [Program]) -> [ChannelInfo] {
-        channels.map { channel in
-            let programs = programs.filter { $0.recentAirTime.channelId == channel.id }
-
-            return ChannelInfo(
-                channel: channel,
-                programs: programs
-            )
         }
     }
 }

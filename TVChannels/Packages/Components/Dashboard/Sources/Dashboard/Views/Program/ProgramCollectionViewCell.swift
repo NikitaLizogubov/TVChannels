@@ -23,6 +23,14 @@ final class ProgramCollectionViewCell: UICollectionViewCell {
 
         setupUI()
     }
+
+    override func setNeedsUpdateConfiguration() {
+        super.setNeedsUpdateConfiguration()
+
+        guard let viewModel else { return }
+
+        containerView.backgroundColor = isFocused ? viewModel.focusBackgroundColor : viewModel.backgroundColor
+    }
 }
 
 // MARK: - Private

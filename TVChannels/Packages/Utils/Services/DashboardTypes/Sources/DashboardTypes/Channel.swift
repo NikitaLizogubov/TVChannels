@@ -1,10 +1,10 @@
 import Foundation
 
-struct Channel: Decodable {
-    let id: Int
-    let orderNumber: Int
-    let accessNumber: Int
-    let callSign: String
+public struct Channel: Decodable {
+    public let id: Int
+    public let orderNumber: Int
+    public let accessNumber: Int
+    public let callSign: String
 
     private enum CodingKeys: String, CodingKey {
         case id

@@ -1,8 +1,8 @@
 import Foundation
 
-struct RecentAirTime: Decodable {
-    let id: Int
-    let channelId: Int
+public struct RecentAirTime: Decodable {
+    public let id: Int
+    public let channelId: Int
 
     private enum CodingKeys: String, CodingKey {
         case id

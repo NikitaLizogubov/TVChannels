@@ -6,7 +6,7 @@ protocol DashboardViewProtocol: AnyObject {
     func stopLoading()
 
     func showChannels(_ channelViewModels: [ChannelCellViewModelProtocol])
-    func showPrograms(_ programViewModels: [ProgramCellViewModelProtocol])
+    func showPrograms(_ programGuideViewModels: [ProgramGuideViewModel])
 }
 
 final class DashboardViewController: UIViewController {
@@ -14,27 +14,35 @@ final class DashboardViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet private weak var loadingView: UIActivityIndicatorView!
-    @IBOutlet private weak var channelTableVIew: UITableView! {
+    @IBOutlet private weak var channelTableView: UITableView! {
         didSet {
-            channelTableVIew.dataSource = self
-            channelTableVIew.delegate = self
+            channelTableView.dataSource = self
+            channelTableView.delegate = self
+            channelTableView.register(cellTypes: ChannelTableViewCell.self, bundle: .module)
         }
     }
     @IBOutlet private weak var programCollectionView: UICollectionView! {
         didSet {
             programCollectionView.dataSource = self
             programCollectionView.delegate = self
+            programCollectionView.register(
+                cellTypes: TimeLineCollectionViewCell.self, ProgramCollectionViewCell.self,
+                bundle: .module
+            )
         }
     }
 
     // MARK: - Public properties
 
     var presenter: DashboardPresenterProtocol?
+    var programLayout: ProgramLayout?
 
     // MARK: - Private methods
 
     private var channelViewModels: [ChannelCellViewModelProtocol] = []
-    private var programViewModels: [ProgramCellViewModelProtocol] = []
+    private var programGuideViewModels: [ProgramGuideViewModel] = []
+
+    private let collectionCellViewFactory = ProgramCellFactory()
 
     // MARK: - Lifecycle
 
@@ -43,39 +51,11 @@ final class DashboardViewController: UIViewController {
 
         print("\(self) -> 💫")
 
-        registerCells()
-
         presenter?.viewDidLoad()
     }
 
     deinit {
         print("\(self) -> ☠️")
-    }
-}
-
-// MARK: - Private methods
-
-private extension DashboardViewController {
-
-    func registerCells() {
-        registerChannelCells()
-        registerProgramCells()
-    }
-
-    func registerChannelCells() {
-        [
-            ChannelTableViewCell.self
-        ].forEach {
-            channelTableVIew.register($0.loadFromNib(bundle: .module), forCellReuseIdentifier: $0.identifier)
-        }
-    }
-
-    func registerProgramCells() {
-        [
-            ProgramCollectionViewCell.self
-        ].forEach {
-            programCollectionView.register($0.loadFromNib(bundle: .module), forCellWithReuseIdentifier: $0.identifier)
-        }
     }
 }
 
@@ -94,11 +74,11 @@ extension DashboardViewController: DashboardViewProtocol {
     func showChannels(_ channelViewModels: [ChannelCellViewModelProtocol]) {
         self.channelViewModels = channelViewModels
 
-        channelTableVIew.reloadData()
+        channelTableView.reloadData()
     }
 
-    func showPrograms(_ programViewModels: [ProgramCellViewModelProtocol]) {
-        self.programViewModels = programViewModels
+    func showPrograms(_ programGuideViewModels: [ProgramGuideViewModel]) {
+        self.programGuideViewModels = programGuideViewModels
 
         programCollectionView.reloadData()
     }
@@ -137,17 +117,24 @@ extension DashboardViewController: UITableViewDelegate {
 extension DashboardViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        programViewModels.count
+        programGuideViewModels.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: ProgramCollectionViewCell.identifier,
-            for: indexPath
-        ) as! ProgramCollectionViewCell
+        collectionCellViewFactory.makeCell(
+            collectionView: collectionView,
+            viewModel: programGuideViewModels[indexPath.row],
+            indexPath: indexPath
+        )
+    }
+}
 
-        cell.viewModel = programViewModels[indexPath.row]
-        return cell
+// MARK: - UICollectionViewDelegate
+
+extension DashboardViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        programGuideViewModels[indexPath.row].didSelect()
     }
 }
 
@@ -156,14 +143,14 @@ extension DashboardViewController: UICollectionViewDataSource {
 extension DashboardViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 600.0, height: view.bounds.height / 3)
+        programLayout?.size(bounds: collectionView.bounds, viewModel: programGuideViewModels[indexPath.row]) ?? .zero
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        .zero
+        programLayout?.grid.lineSpacing ?? .zero
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        .zero
+        programLayout?.grid.interitemSpacing ?? .zero
     }
 }

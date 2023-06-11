@@ -1,4 +1,5 @@
 import UIKit
+import DashboardTypes
 
 protocol ChannelCellViewModelInput {
     var number: String { get }
@@ -22,8 +23,8 @@ struct ChannelCellViewModel: ChannelCellViewModelInput {
 
     // MARK: - Init
 
-    init(info: ChannelInfo) {
-        self.number = String(info.channel.orderNumber)
-        self.name = info.channel.callSign
+    init(channel: Channel) {
+        self.number = String(channel.orderNumber)
+        self.name = channel.callSign
     }
 }
