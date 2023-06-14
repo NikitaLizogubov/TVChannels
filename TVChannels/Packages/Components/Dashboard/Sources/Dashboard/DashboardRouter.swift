@@ -3,12 +3,9 @@ import Network
 import CommonUI
 import DashboardTypes
 
-protocol DashboardRouterProtocol {
-    func showProgramDetails(_ program: Program)
-    func showError(_ message: String)
-}
+protocol DashboardRouterProtocol { }
 
-public final class DashboardRouter {
+public final class DashboardRouter: DashboardRouterProtocol {
 
     public enum Event {
         case programDetails(Program)
@@ -81,9 +78,9 @@ public final class DashboardRouter {
     }
 }
 
-// MARK: - DashboardRouterProtocol
+// MARK: - DashboardPresenterToRouterProtocol
 
-extension DashboardRouter: DashboardRouterProtocol {
+extension DashboardRouter: DashboardPresenterToRouterProtocol {
 
     func showProgramDetails(_ program: Program) {
         onEvent(.programDetails(program))

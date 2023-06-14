@@ -2,14 +2,15 @@ import UIKit
 import CommonUI
 
 protocol DashboardViewProtocol: AnyObject {
-    func startLoading()
-    func stopLoading()
-
-    func showChannels(_ channelViewModels: [ChannelCellViewModelProtocol])
-    func showPrograms(_ programGuideViewModels: [ProgramGuideViewModel])
+    var presenter: DashboardViewToPresenterProtocol? { get set }
 }
 
-final class DashboardViewController: UIViewController {
+protocol DashboardViewToPresenterProtocol {
+    func viewDidLoad()
+    func showProgramGuide(by indexPath: IndexPath)
+}
+
+final class DashboardViewController: UIViewController, DashboardViewProtocol {
 
     // MARK: - IBOutlet
 
@@ -34,7 +35,7 @@ final class DashboardViewController: UIViewController {
 
     // MARK: - Public properties
 
-    var presenter: DashboardPresenterProtocol?
+    var presenter: DashboardViewToPresenterProtocol?
     var programLayout: ProgramLayout?
 
     // MARK: - Private methods
@@ -59,9 +60,9 @@ final class DashboardViewController: UIViewController {
     }
 }
 
-// MARK: - DashboardViewProtocol
+// MARK: - DashboardPresenterToViewProtocol
 
-extension DashboardViewController: DashboardViewProtocol {
+extension DashboardViewController: DashboardPresenterToViewProtocol {
 
     func startLoading() {
         loadingView.isHidden = false

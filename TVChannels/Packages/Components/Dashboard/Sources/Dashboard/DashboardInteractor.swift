@@ -3,14 +3,18 @@ import Network
 import DashboardTypes
 
 protocol DashboardInteractorProtocol {
+    var presenter: DashboardIneractorToPresenterProtocol? { get set }
+}
+
+protocol DashboardPresenterToInteractorProtocol {
     func loadData()
 }
 
-final class DashboardInteractor {
+final class DashboardInteractor: DashboardInteractorProtocol {
 
     // MARK: - Public properties
 
-    weak var presenter: DashboardPresenterProtocol?
+    weak var presenter: DashboardIneractorToPresenterProtocol?
 
     // MARK: - Private properties
 
@@ -34,9 +38,9 @@ final class DashboardInteractor {
     }
 }
 
-// MARK: - DashboardInteractorProtocol
+// MARK: - DashboardPresenterToInteractorProtocol
 
-extension DashboardInteractor: DashboardInteractorProtocol {
+extension DashboardInteractor: DashboardPresenterToInteractorProtocol {
 
     func loadData() {
         let dispatchGroup = DispatchGroup()

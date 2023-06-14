@@ -1,10 +1,27 @@
 import Foundation
 import DashboardTypes
 
-protocol DashboardPresenterProtocol: AnyObject {
-    func viewDidLoad()
+protocol DashboardPresenterProtocol {
+    var view: DashboardPresenterToViewProtocol? { get set }
+    var interactor: DashboardPresenterToInteractorProtocol? { get set }
+    var router: DashboardPresenterToRouterProtocol? { get set }
+}
+
+protocol DashboardIneractorToPresenterProtocol: AnyObject {
     func channelInfoLoadingFinished(_ channelInfo: [ChannelInfo])
-    func showProgramGuide(by indexPath: IndexPath)
+    func showError(_ message: String)
+}
+
+protocol DashboardPresenterToViewProtocol: AnyObject {
+    func startLoading()
+    func stopLoading()
+
+    func showChannels(_ channelViewModels: [ChannelCellViewModelProtocol])
+    func showPrograms(_ programGuideViewModels: [ProgramGuideViewModel])
+}
+
+protocol DashboardPresenterToRouterProtocol {
+    func showProgramDetails(_ program: Program)
     func showError(_ message: String)
 }
 
@@ -12,9 +29,9 @@ final class DashboardPresenter {
 
     // MARK: - Public properties
 
-    weak var view: DashboardViewProtocol?
-    var interactor: DashboardInteractorProtocol?
-    var router: DashboardRouterProtocol?
+    weak var view: DashboardPresenterToViewProtocol?
+    var interactor: DashboardPresenterToInteractorProtocol?
+    var router: DashboardPresenterToRouterProtocol?
 
     // MARK: - Private properties
 
@@ -38,14 +55,9 @@ final class DashboardPresenter {
     }
 }
 
-// MARK: - DashboardPresenterProtocol
+// MARK: - DashboardViewToPresenterProtocol
 
-extension DashboardPresenter: DashboardPresenterProtocol {
-
-    func viewDidLoad() {
-        view?.startLoading()
-        interactor?.loadData()
-    }
+extension DashboardPresenter: DashboardIneractorToPresenterProtocol {
 
     func channelInfoLoadingFinished(_ channelInfo: [ChannelInfo]) {
         self.channelInfo = channelInfo
@@ -60,6 +72,22 @@ extension DashboardPresenter: DashboardPresenterProtocol {
         showProgramGuide(by: IndexPath(row: .zero, section: .zero))
     }
 
+    func showError(_ message: String) {
+        view?.stopLoading()
+
+        router?.showError(message)
+    }
+}
+
+// MARK: - DashboardViewToPresenterProtocol
+
+extension DashboardPresenter: DashboardViewToPresenterProtocol {
+
+    func viewDidLoad() {
+        view?.startLoading()
+        interactor?.loadData()
+    }
+
     func showProgramGuide(by indexPath: IndexPath) {
         let channelInfo = channelInfo[indexPath.row]
         let cellViewModels = makeProgramViewModels(channelInfo.programs)
@@ -67,12 +95,6 @@ extension DashboardPresenter: DashboardPresenterProtocol {
         view?.showPrograms(cellViewModels)
 
         selectedChannelInfo = channelInfo
-    }
-
-    func showError(_ message: String) {
-        view?.stopLoading()
-
-        router?.showError(message)
     }
 }
 
