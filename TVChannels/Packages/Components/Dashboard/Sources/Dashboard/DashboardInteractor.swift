@@ -6,8 +6,9 @@ protocol DashboardInteractorProtocol {
     var presenter: DashboardIneractorToPresenterProtocol? { get set }
 }
 
-protocol DashboardPresenterToInteractorProtocol {
-    func loadData()
+protocol DashboardIneractorToPresenterProtocol: AnyObject {
+    func channelInfoLoadingFinished(_ channelInfo: [ChannelInfo])
+    func showError(_ message: String)
 }
 
 final class DashboardInteractor: DashboardInteractorProtocol {

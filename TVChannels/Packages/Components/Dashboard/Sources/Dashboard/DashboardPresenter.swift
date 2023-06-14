@@ -7,9 +7,8 @@ protocol DashboardPresenterProtocol {
     var router: DashboardPresenterToRouterProtocol? { get set }
 }
 
-protocol DashboardIneractorToPresenterProtocol: AnyObject {
-    func channelInfoLoadingFinished(_ channelInfo: [ChannelInfo])
-    func showError(_ message: String)
+protocol DashboardPresenterToInteractorProtocol {
+    func loadData()
 }
 
 protocol DashboardPresenterToViewProtocol: AnyObject {
