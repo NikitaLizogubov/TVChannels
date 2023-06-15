@@ -23,10 +23,10 @@ The app is using 'VIPER+VM' architectural pattern (UIKit).
 ## UI:
 ![simulator_screenshot_1713663B-8DCE-4750-9607-1269A73A2BD2](https://github.com/NikitaLizogubov/TVChannels/assets/42281938/405569c5-eaeb-41d4-9b99-3931750eff0b)
 
-## Requirements and implementation:
+## Implementation:
 1. - [x] User should be able to scroll up/down and left/right through all channels and all available programs.
 
-https://github.com/NikitaLizogubov/TVChannels/assets/42281938/0f166591-8db5-483b-8bb8-ca724ab7ba60
+https://github.com/NikitaLizogubov/TVChannels/assets/42281938/9d1fd3e8-6387-4898-a2bc-19ef187467d1
 
 2. - [x] Creating extendable architecture, which will allow lazy-loading and caching of program items in the future.
 
